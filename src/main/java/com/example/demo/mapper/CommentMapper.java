@@ -12,11 +12,13 @@ import java.util.Set;
 @Mapper
 public interface CommentMapper {
   CommentMapper  INSTANCE = Mappers.getMapper(CommentMapper.class);
+  /*
     @Mappings({
             @Mapping(source = "userId", target = "user.id"),
             @Mapping(source = "recipeId", target = "recipe.id")
     })
     Comment toEntity(CommentDto commentDto);
+
     @Mappings({
             @Mapping(source = "user", target = "user"),
             @Mapping(source = "recipe", target = "recipe")
@@ -24,4 +26,6 @@ public interface CommentMapper {
     CommentResponseDto toResponseDto(Comment comment);
 
     Set<CommentResponseDto> toResponseDtoSet(Set<Comment> comments);
+    */
+
 }

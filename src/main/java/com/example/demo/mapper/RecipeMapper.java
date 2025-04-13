@@ -12,7 +12,9 @@ import java.util.Set;
 
 @Mapper
 public interface RecipeMapper {
+
     RecipeMapper INSTANCE = Mappers.getMapper(RecipeMapper.class);
+    /*
     @Mappings({
             @Mapping(source = "ingredientIds", target = "ingredients"),
             @Mapping(source = "userId", target = "user.id"),
@@ -21,13 +23,15 @@ public interface RecipeMapper {
             @Mapping(source="commentIds",target = "comments", defaultValue = "emptySet()")
     })
     Recipe toEntity(RecipeDTO recipeDto);
+
     @Mappings({
             @Mapping(source = "ingredients", target = "ingredients"),
             @Mapping(source = "user", target = "user"),
             @Mapping(source = "category", target = "category"),
-            @Mapping(source = "tags", target = "tags",defaultExpression = "java(new java.util.HashSet<>())"),
-            @Mapping( source = "comments",target = "comments", defaultExpression = "java(new java.util.HashSet<>())")
+            @Mapping(source = "tags", target = "tags"),
+            @Mapping( source = "comments",target = "comments")
     })
     RecipeResponseDto toResponseDto(Recipe recipe);
     Set<RecipeResponseDto> toResponseDtoSet(Set<Recipe> recipes);
+    */
 }

@@ -9,11 +9,17 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.Set;
 
-@Mapper
+@Mapper(componentModel = "spring.application.name")
 public interface CategoryMapper {
-    CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
-    Category toEntity(CategoryDto categoryDto);
-    @Mapping(source = "recipes", target = "recipes",defaultExpression = "java(new java.util.HashSet<>())")
+    /*
+  CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
+
+  @Mapping(source="recipeIds", target = "recipes", defaultExpression = "java(new java.util.HashSet<>())")
+  Category toEntity(CategoryDto categoryDto);
+
+  @Mapping(source = "recipes", target = "recipes",defaultExpression = "java(new java.util.HashSet<>())")
+
     CategoryResponseDto toResponseDto(Category category);
     Set<CategoryResponseDto> toResponseDtoSet(Set<Category> categories);
+    */
 }

@@ -10,10 +10,7 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,4 +40,100 @@ private Set<Ingredient> ingredients;
     joinColumns = @JoinColumn(name="recipe_id"),
     inverseJoinColumns =@JoinColumn(name = "tag_id"))
     private Set<Tag> tags;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public int getCokingTime() {
+        return cokingTime;
+    }
+
+    public void setCokingTime(int cokingTime) {
+        this.cokingTime = cokingTime;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public Recipe(Long id, String title, String instructions, int cokingTime, String imageUrl, Set<Ingredient> ingredients, User user, Set<Comment> comments, Category category, Set<Tag> tags) {
+        this.id = id;
+        this.title = title;
+        this.instructions = instructions;
+        this.cokingTime = cokingTime;
+        this.imageUrl = imageUrl;
+        this.ingredients = ingredients;
+        this.user = user;
+        this.comments = comments;
+        this.category = category;
+        this.tags = tags;
+    }
+
+    public Recipe() {
+    }
 }

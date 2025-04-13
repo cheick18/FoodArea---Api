@@ -8,10 +8,7 @@ import lombok.Setter;
 
 import java.util.Set;
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +19,40 @@ public class Ingredient {
     private int quantity;
     @ManyToMany
     private Set<Recipe> recipes;
+
+    public Ingredient() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
 }

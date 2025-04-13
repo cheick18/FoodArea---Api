@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 public class IngredientController {
     private final IngredientService ingredientService;
@@ -28,6 +30,10 @@ public class IngredientController {
     public ResponseEntity<IngredientResponseDto> getIngredient(@PathVariable Long id){
         IngredientResponseDto ingredient=ingredientService.getIngredientById(id);
         return ResponseEntity.ok(ingredient);
+    }
+    @GetMapping("/api/ingredients")
+    public ResponseEntity<Set<IngredientResponseDto>> getAllIngredients(){
+        return ResponseEntity.ok(ingredientService.getAllIngredients());
     }
     @DeleteMapping("/api/ingredients/{id}")
     public ResponseEntity<Void> deleteIngredient(@PathVariable Long id){

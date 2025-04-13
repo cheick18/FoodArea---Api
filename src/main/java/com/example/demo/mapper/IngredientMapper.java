@@ -12,9 +12,15 @@ import org.mapstruct.factory.Mappers;
 import java.util.Set;
 @Mapper
 public interface IngredientMapper {
+
     IngredientMapper INSTANCE = Mappers.getMapper(IngredientMapper.class);
+    /*
+    @Mapping(source="recipeIds", target = "recipes", defaultExpression = "java(new java.util.HashSet<>())")
     Ingredient toEntity(IngredientDto ingredientDto);
-    @Mapping(target = "recipes", defaultExpression = "java(new java.util.HashSet<>())")
+
+    @Mapping(source="recipes", target = "recipes", defaultExpression = "java(new java.util.HashSet<>())")
     IngredientResponseDto toResponseDto(Ingredient ingredient);
     Set<IngredientResponseDto> toResponseDtoSet(Set<Ingredient> ingredients);
+
+     */
 }

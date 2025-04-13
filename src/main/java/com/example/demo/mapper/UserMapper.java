@@ -12,13 +12,17 @@ import java.util.Set;
 @Mapper
 public interface UserMapper {
     UserMapper INSTANCE= Mappers.getMapper(UserMapper.class);
+/*
     User toEntity(UserDTo userDto);
+    /*
     @Mappings({
-            @Mapping(target = "recipes", defaultExpression = "java(new java.util.HashSet<>())"),
+            @Mapping(source = "recipes",target = "recipes", defaultExpression = "java(new java.util.HashSet<>())"),
             @Mapping(target = "comments", defaultExpression = "java(new java.util.HashSet<>())")
     })
 
     UserResponseDto toResponseDto(User user);
 
     Set<UserResponseDto> toResponseDtoSet(Set<User> users);
+
+ */
 }

@@ -12,6 +12,8 @@ import org.hibernate.id.IncrementGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -23,15 +25,22 @@ public class IngredientService {
     {
         this.ingredientRepository = ingredientRepository;
     }
+    public IngredientResponseDto toResponseDto(Ingredient ingredient){
+        return new IngredientResponseDto(ingredient.getId(),ingredient.getName());
+    }
     public IngredientResponseDto createIngredient(IngredientDto ingredientDto){
-        Ingredient ingredient=  IngredientMapper.INSTANCE.toEntity(ingredientDto);
+        Ingredient ingredient= new Ingredient();
+        Set<Recipe> recipes= new HashSet<>();
+        ingredient.setRecipes(recipes);
+        ingredient.setName(ingredientDto.getName());
+        ingredient.setQuantity(0);
 
-        return IngredientMapper.INSTANCE.toResponseDto(ingredientRepository.save(ingredient));
+        return  toResponseDto(ingredientRepository.save(ingredient));
 
     }
     public IngredientResponseDto getIngredientById(Long id){
         Ingredient ingredient=ingredientRepository.findById(id).orElseThrow(()->new IngredientNotFoundException(id));
-        return IngredientMapper.INSTANCE.toResponseDto(ingredient);
+        return toResponseDto(ingredient);
     }
     @Transactional
     public void deleteIngredient(Long id){
@@ -40,16 +49,18 @@ public class IngredientService {
     }
     @Transactional
     public IngredientResponseDto updateIngredient(Long id, IngredientDto ingredientDto){Ingredient ingredient=ingredientRepository.findById(id).orElseThrow(()->new IngredientNotFoundException(id));
-      Ingredient ingredientUpdated=IngredientMapper.INSTANCE.toEntity(ingredientDto);
-      ingredient.setName(ingredientUpdated.getName());
-      ingredient.setQuantity(ingredientUpdated.getQuantity());
-      ingredient.setRecipes(ingredientUpdated.getRecipes());
-      return IngredientMapper.INSTANCE.toResponseDto(ingredientRepository.save(ingredient));
+
+      ingredient.setName(ingredientDto.getName());
+      ingredient.setQuantity(ingredientDto.getQuantity());
+
+      return toResponseDto(ingredientRepository.save(ingredient));
 
     }
     public Set<IngredientResponseDto> getAllIngredients(){
-        Set<Ingredient> ingredients= (Set<Ingredient>) ingredientRepository.findAll();
-        return IngredientMapper.INSTANCE.toResponseDtoSet(ingredients);
+        List<Ingredient> ingredients= ingredientRepository.findAll();
+        List<IngredientResponseDto> ingredientresponse=ingredients.stream().map(this::toResponseDto).toList();
+        Set<IngredientResponseDto> ingredientsSet=new HashSet<>(ingredientresponse);
+        return ingredientsSet;
 
     }
 
