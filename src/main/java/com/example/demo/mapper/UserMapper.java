@@ -2,7 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.dto.UserDTo;
 import com.example.demo.dto.UserResponseDto;
-import com.example.demo.model.User;
+import com.example.demo.model.AppUser;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

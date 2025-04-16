@@ -7,7 +7,7 @@ import com.example.demo.exception.RecipeNotFoundException;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.Comment;
 import com.example.demo.model.Recipe;
-import com.example.demo.model.User;
+import com.example.demo.model.AppUser;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.RecipeRepository;
 import com.example.demo.repository.UserRepository;
@@ -32,7 +32,7 @@ public class CommentService {
         return new CommentResponseDto(comment.getId(), comment.getContent(), comment.getRating(), comment.getUser().getLogin());
     }
     public CommentResponseDto createComment(CommentDto commentDto){
-        User user=userRepository.findById(commentDto.getUserId()).orElseThrow(()->new UserNotFoundException(commentDto.getUserId()));
+        AppUser user=userRepository.findById(commentDto.getUserId()).orElseThrow(()->new UserNotFoundException(commentDto.getUserId()));
         Recipe recipe=recipeRepository.findById(commentDto.getRecipeId()).orElseThrow(()->new RecipeNotFoundException(commentDto.getRecipeId()));
         Comment comment=new Comment();
         comment.setUser(user);

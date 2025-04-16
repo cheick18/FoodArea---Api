@@ -1,15 +1,11 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Set;
 @Entity
 @Table(name = "users")
-public class User {
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,12 +16,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AccountType accountType;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "appUser")
     Set<Recipe> recipes;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "appUser")
     Set<Comment> comments;
 
-    public User() {
+    public AppUser() {
     }
 
     public void setId(Long id) {

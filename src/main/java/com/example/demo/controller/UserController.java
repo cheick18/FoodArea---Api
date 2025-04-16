@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.Service.UserService;
 import com.example.demo.dto.UserDTo;
 import com.example.demo.dto.UserResponseDto;
-import com.example.demo.model.User;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +17,21 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @PostMapping("/api/auth/registration")
+
+    @PostMapping("/api/test")
+    public  boolean test(@Valid @RequestBody UserDTo userDTo){
+        return true;
+
+    }
+    @PostMapping("/api/registration")
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserDTo userDTo){
         UserResponseDto savedUser=userService.createUser(userDTo);
         return ResponseEntity.ok(savedUser);
+
+    }
+    @PostMapping("/api/login")
+    public boolean login(@Valid @RequestBody UserDTo userDTo){
+       return  userService.verifyUser(userDTo);
 
     }
     @GetMapping("/api/users/{id}")

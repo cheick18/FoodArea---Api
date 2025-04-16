@@ -2,10 +2,6 @@ package com.example.demo.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Set;
 
@@ -28,7 +24,7 @@ private Set<Ingredient> ingredients;
 
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
-    private User user;
+    private AppUser appUser;
     @OneToMany(mappedBy = "recipe")
     Set<Comment> comments;
     @ManyToOne
@@ -89,12 +85,12 @@ private Set<Ingredient> ingredients;
         this.ingredients = ingredients;
     }
 
-    public User getUser() {
-        return user;
+    public AppUser getUser() {
+        return appUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public Set<Comment> getComments() {
@@ -121,14 +117,14 @@ private Set<Ingredient> ingredients;
         this.tags = tags;
     }
 
-    public Recipe(Long id, String title, String instructions, int cokingTime, String imageUrl, Set<Ingredient> ingredients, User user, Set<Comment> comments, Category category, Set<Tag> tags) {
+    public Recipe(Long id, String title, String instructions, int cokingTime, String imageUrl, Set<Ingredient> ingredients, AppUser appUser, Set<Comment> comments, Category category, Set<Tag> tags) {
         this.id = id;
         this.title = title;
         this.instructions = instructions;
         this.cokingTime = cokingTime;
         this.imageUrl = imageUrl;
         this.ingredients = ingredients;
-        this.user = user;
+        this.appUser = appUser;
         this.comments = comments;
         this.category = category;
         this.tags = tags;

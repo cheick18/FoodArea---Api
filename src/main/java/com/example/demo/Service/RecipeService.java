@@ -63,7 +63,7 @@ public RecipeResponseDto toResponseDto(Recipe recipe){
         Set<Comment> comments=new HashSet<>();
         Set<Tag> mytags=new HashSet<>();
         Category category = categoryRepository.findById(recipeDto.getCategoryId()).orElseThrow(() -> new CategoryNotFoundException(recipeDto.getCategoryId()));
-        User user = userRepository.findById(recipeDto.getUserId()).orElseThrow(() -> new UserNotFoundException(recipeDto.getUserId()));
+        AppUser user = userRepository.findById(recipeDto.getUserId()).orElseThrow(() -> new UserNotFoundException(recipeDto.getUserId()));
 
         Set<Long> ingrdientIds = new HashSet<>();
         recipeDto.getIngredients().forEach(recipeIngredientDto -> {

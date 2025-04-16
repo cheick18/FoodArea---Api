@@ -1,10 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 
@@ -15,8 +11,8 @@ public class Comment {
     private String content;
     private int rating;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = " appUser_id")
+    private AppUser appUser;
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
@@ -49,12 +45,12 @@ public class Comment {
         this.rating = rating;
     }
 
-    public User getUser() {
-        return user;
+    public AppUser getUser() {
+        return appUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public Recipe getRecipe() {
