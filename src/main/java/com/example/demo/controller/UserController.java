@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.Service.UserService;
 import com.example.demo.dto.UserDTo;
+import com.example.demo.dto.UserLoginDto;
 import com.example.demo.dto.UserResponseDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class UserController {
 
     }
     @PostMapping("/api/login")
-    public boolean login(@Valid @RequestBody UserDTo userDTo){
+    public String login(@Valid @RequestBody UserLoginDto userDTo){
        return  userService.verifyUser(userDTo);
 
     }

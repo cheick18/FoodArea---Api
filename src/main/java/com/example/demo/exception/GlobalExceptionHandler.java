@@ -11,6 +11,11 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(LoginAlreadyExistsException.class)
+    public ResponseEntity<String> handleLoginAlreadyExistsException(LoginAlreadyExistsException ex){
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.BAD_REQUEST);
+
+    }
     @ExceptionHandler(IngredientNotFoundException.class)
     public ResponseEntity<String> handleIngredientNotFoundException(IngredientNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);

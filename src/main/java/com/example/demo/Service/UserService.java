@@ -1,7 +1,9 @@
 package com.example.demo.Service;
 
 import com.example.demo.dto.UserDTo;
+import com.example.demo.dto.UserLoginDto;
 import com.example.demo.dto.UserResponseDto;
+import com.example.demo.exception.LoginAlreadyExistsException;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.AppUser;
 import com.example.demo.repository.UserRepository;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,11 +24,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, AuthenticationManager authenticationManager) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, AuthenticationManager authenticationManager, JwtService jwtService) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
     }
     public UserResponseDto toResponseDto(AppUser user)
     {
@@ -34,6 +39,9 @@ public class UserService {
     }
     public UserResponseDto createUser(UserDTo userDTo)
     {
+        if (userRepository.findByLogin(userDTo.getLogin()).isPresent()) {
+            throw new LoginAlreadyExistsException(userDTo.getLogin());
+        }
         AppUser user=new AppUser();
         user.setPassword(bCryptPasswordEncoder.encode(userDTo.getPassword()));
         user.setAccountType(userDTo.getAccountType());
@@ -42,7 +50,7 @@ public class UserService {
     }
 
 
-    public boolean verifyUser(UserDTo userDTo){
+    public String verifyUser(UserLoginDto userDTo){
     Authentication authentication =
                             authenticationManager.authenticate(
                              new UsernamePasswordAuthenticationToken(userDTo.getLogin(),userDTo.getPassword())
@@ -50,9 +58,14 @@ public class UserService {
      /*   var user=userRepository.findByLogin(userDTo.getLogin());
 
       */
-        if(authentication.isAuthenticated())
-            return true;
-        return false;
+        if(authentication.isAuthenticated()){
+            Optional<AppUser> user= userRepository.findByLogin(userDTo.getLogin());
+
+            return jwtService.generateToken(user.get());
+
+        }
+
+        return "User not registrated";
 
     }
     public UserResponseDto getUserById(Long id)
