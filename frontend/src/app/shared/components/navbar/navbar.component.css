@@ -1,0 +1,19 @@
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0;
+  padding-right: 0;
+  padding-left: 60px;
+  padding-right: 60px;
+  border:none;
+  background-color: #045D56;
+
+}
+
+.menu-spacer {
+  flex-grow: 1;
+}
+/* Supprimer les effets de survol et de clic visuel pour le logo */
+
+

@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+
+  box-sizing: border-box;
+}
+body,html{
+  font-family: "Playfair Display", serif;
+
+}
+:root {
+  /* Couleur principale */
+  --primary-color: #027368;
+
+  /* Couleurs secondaires */
+  --secondary-light: #59B2A2;
+  --secondary-dark: #045D56;
+  --secondary-pastel: #A0D6CE;
+
+  /* Couleurs d'accent */
+  --accent-yellow: #F4C95D;
+  --accent-coral: #FF6F59;
+
+  /* Couleurs neutres */
+  --white: #FFFFFF;
+  --text-dark: #2F2F2F;
+  --background-light: #F9F9F9;
+}
